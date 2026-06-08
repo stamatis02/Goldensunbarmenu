@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bar Menu – Golden Sand Hotel</title>
+    <title>Premium Bar Menu – Golden Sand Hotel</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,340 +11,306 @@
 
     <style>
         :root {
-            /* Clean White, Dominant Blue, Amber Accents */
-            --bg-page: #ffffff;
-            --primary-blue: #003b7a; /* Sea View / Fegoudakis Deep Blue */
-            --light-blue: #ebf3fa;
-            --accent-amber: #d4af37; /* Amber/Gold */
-            --text-main: #1a2b4c;
+            /* Relaxing Zen Palette: Soft Blues & Muted Gold */
+            --bg-page: #f8fafd;
+            --primary-blue: #1b3a57; /* Deep Muted Blue */
+            --soft-blue: #708090; /* Slate Blue */
+            --ice-blue: #eef4f9;
+            --accent-gold: #c5a059; /* Muted Elegant Gold */
+            --text-main: #2c3e50;
             --text-muted: #5a7d9a;
             --card-bg: #ffffff;
-            --badge-bg: #fdf5e6;
-            --allergen-border: #e0eaf5;
-            --vegan: #4caf50;
-            --vegetarian: #8bc34a;
+            --allergen-border: #d1dae3;
+            --vegan: #66bb6a;
+            --vegetarian: #9ccc65;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Nunito', sans-serif; background-color: var(--bg-page); color: var(--text-main); line-height: 1.5; overflow-x: hidden; }
 
-        /* ------------------------------------- SPLASH SCREEN -------------------------------------- */
+        /* ------------------------------------- ORIGINAL LOGO ANIMATION (Splash) -------------------------------------- */
         .splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #ffffff;
-            z-index: 9999999;
+            background: #ffffff; z-index: 9999999;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-            cursor: pointer;
-            overflow: hidden;
+            transition: opacity 0.8s ease, visibility 0.8s ease; cursor: pointer;
         }
+        .splash-screen.hidden { opacity: 0; visibility: hidden; }
         
-        /* Soft Focus & Bokeh Lights */
-        .bokeh {
-            position: absolute; border-radius: 50%; filter: blur(35px);
-            animation: float-bokeh 8s infinite alternate ease-in-out; z-index: 1;
-        }
-        .bokeh-blue { width: 350px; height: 350px; background: rgba(0, 59, 122, 0.08); top: -10%; left: -20%; }
-        .bokeh-amber { width: 250px; height: 250px; background: rgba(212, 175, 55, 0.12); bottom: 15%; right: -15%; animation-delay: -3s; }
+        .logo-fill-container { position: relative; margin: 0 auto 20px auto; z-index: 2; text-align: center; }
+        .hotel-typographic { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 800; line-height: 1; }
+        .hotel-stars { font-size: 1.1rem; letter-spacing: 5px; margin-top: 8px; color: #ccc; }
         
-        /* Wavy Fabrics Effect */
-        .wavy-fabric {
-            position: absolute; bottom: -5%; left: -10%; width: 120%; height: 35%;
-            background: radial-gradient(ellipse at bottom, rgba(0, 59, 122, 0.05), transparent);
-            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-            filter: blur(8px); z-index: 1;
+        .logo-bg-gray { color: #eeeeee; } /* Base gray text */
+        .logo-fg-gold {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+            color: var(--accent-gold); /* Fills with Gold */
+            clip-path: inset(100% 0 0 0);
+            animation: fill-up 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            animation-delay: 0.5s;
         }
-        .wavy-fabric-2 {
-            position: absolute; bottom: -10%; left: -20%; width: 140%; height: 40%;
-            background: radial-gradient(ellipse at bottom, rgba(212, 175, 55, 0.05), transparent);
-            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-            filter: blur(12px); z-index: 1;
-        }
+        @keyframes fill-up { 0% { clip-path: inset(100% 0 0 0); } 100% { clip-path: inset(0 0 0 0); } }
 
-        .splash-content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
-
-        /* Floating Central Object */
-        .logo-floating-container { 
-            position: relative; margin: 0 auto 20px auto; z-index: 2; text-align: center;
-            animation: float-logo 4s ease-in-out infinite;
-        }
-        @keyframes float-logo {
-            0% { transform: translateY(0px); text-shadow: 0 10px 20px rgba(0, 59, 122, 0.1); }
-            50% { transform: translateY(-12px); text-shadow: 0 25px 30px rgba(0, 59, 122, 0.2); }
-            100% { transform: translateY(0px); text-shadow: 0 10px 20px rgba(0, 59, 122, 0.1); }
-        }
-        @keyframes float-bokeh { 0% { transform: translate(0, 0) scale(0.9); } 100% { transform: translate(30px, -30px) scale(1.1); } }
-
-        .splash-title { font-family: 'Playfair Display', serif; color: var(--primary-blue); font-size: 2.8rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 5px; opacity: 0; animation: fade-in 0.8s ease forwards; animation-delay: 0.5s; font-weight: 800;}
-        .splash-hotel { font-family: 'Nunito', sans-serif; color: var(--text-muted); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px; opacity: 0; animation: fade-in 0.8s ease forwards; animation-delay: 1.0s; font-weight: 700;}
-        .splash-subtitle { font-family: 'Dancing Script', cursive; color: var(--accent-amber); font-size: 1.8rem; letter-spacing: 2px; opacity: 0; animation: slide-up-fade 0.9s ease forwards; animation-delay: 1.4s; }
+        .splash-hotel { font-family: 'Nunito', sans-serif; color: var(--soft-blue); font-size: 0.85rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 30px; opacity: 0; animation: fade-in 0.8s ease forwards; animation-delay: 2.2s; }
+        .splash-subtitle { font-family: 'Dancing Script', cursive; color: var(--accent-gold); font-size: 1.6rem; letter-spacing: 2px; opacity: 0; animation: fade-in 0.8s ease forwards; animation-delay: 2.8s; }
 
         @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
-        @keyframes slide-up-fade { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
-        .splash-screen.hidden { opacity: 0; visibility: hidden; }
 
-        /* ------------------------------------- HEADER -------------------------------------- */
-        .header-container { position: relative; width: 100%; padding: 40px 15px 30px; display: flex; flex-direction: column; align-items: center; background-color: var(--primary-blue); text-align: center;}
-        .main-logo-text { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #ffffff; font-weight: 800; line-height: 1; margin-bottom: 8px;}
-        .main-logo-sub { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 3px; color: var(--accent-amber); margin-bottom: 0; font-weight: 700;}
-        
-        .wave-header { position: absolute; bottom: -1px; width: 100%; height: auto; fill: var(--bg-page); }
-
-        /* ------------------------------------- STABLE CATEGORY GRID -------------------------------------- */
-        .stable-nav-container { padding: 25px 15px; background: var(--bg-page); max-width: 800px; margin: 0 auto; }
-        .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .category-btn { 
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: var(--light-blue); color: var(--primary-blue); text-decoration: none; 
-            padding: 12px 5px; border-radius: 12px; font-size: 0.85rem; font-weight: 800; 
-            border: 1px solid var(--allergen-border); transition: 0.2s; text-align: center;
+        /* ------------------------------------- STICKY HEADER -------------------------------------- */
+        header { 
+            position: relative; width: 100%; padding: 30px 15px; 
+            background-color: var(--primary-blue); text-align: center; color: white;
         }
-        .category-btn span.icon { font-size: 1.4rem; margin-bottom: 5px; }
-        .category-btn.nav-allergens { background: #fff0f0; color: #d32f2f; border-color: #ffcdd2; }
+        .main-logo-text { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: #fff; font-weight: 800; letter-spacing: 1px; }
+        .main-logo-sub { font-family: 'Nunito', sans-serif; font-size: 0.7rem; letter-spacing: 4px; color: var(--accent-gold); text-transform: uppercase; }
+
+        /* ------------------------------------- STICKY NAVIGATION -------------------------------------- */
+        .nav-container { 
+            position: sticky; top: 0; z-index: 1000; 
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px);
+            padding: 12px 0; border-bottom: 1px solid var(--allergen-border);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+        .nav-scroll { 
+            display: flex; overflow-x: auto; padding: 0 15px; gap: 10px; 
+            list-style: none; scrollbar-width: none; -ms-overflow-style: none;
+        }
+        .nav-scroll::-webkit-scrollbar { display: none; }
+        .nav-scroll a { 
+            text-decoration: none; color: var(--soft-blue); background: #fff; 
+            padding: 8px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; 
+            white-space: nowrap; border: 1px solid var(--allergen-border); transition: 0.3s;
+        }
+        .nav-scroll a.active { background: var(--primary-blue); color: #fff; border-color: var(--primary-blue); }
+
+        /* ------------------------------------- MENU CONTENT -------------------------------------- */
+        main { max-width: 700px; margin: 0 auto; padding: 25px 15px 60px; }
+        .menu-section { 
+            background: var(--card-bg); border-radius: 20px; padding: 40px 20px 20px; 
+            margin-bottom: 35px; border: 1px solid rgba(209, 218, 227, 0.4);
+            box-shadow: 0 10px 30px rgba(27, 58, 87, 0.04);
+        }
+        .section-title { 
+            font-family: 'Playfair Display', serif; font-size: 1.7rem; text-align: center; 
+            text-transform: uppercase; color: var(--primary-blue); font-weight: 800; margin-bottom: 4px;
+        }
+        .section-subtitle { 
+            font-family: 'Dancing Script', cursive; font-size: 1.4rem; text-align: center; 
+            color: var(--accent-gold); margin-bottom: 40px; 
+        }
         
-        main { max-width: 800px; margin: 0 auto; padding: 10px 15px 60px; }
-        .menu-section { background: var(--card-bg); border-radius: 16px; padding: 35px 20px 25px; margin-bottom: 30px; box-shadow: 0 8px 30px rgba(0, 59, 122, 0.06); border: 1px solid var(--allergen-border);}
-        .section-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; text-align: center; text-transform: uppercase; margin-bottom: 5px; color: var(--primary-blue); font-weight: 800;}
-        .section-subtitle { font-family: 'Dancing Script', cursive; font-size: 1.4rem; text-align: center; color: var(--accent-amber); margin-bottom: 35px; }
+        .menu-item { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid var(--ice-blue);}
+        .menu-item:last-child { border-bottom: none; }
+        .item-name { color: var(--text-main); font-weight: 700; font-size: 1.1rem; margin-bottom: 4px; }
+        .item-desc { color: var(--text-muted); font-size: 0.85rem; font-weight: 400; max-width: 80%; margin: 0 auto; }
+        .item-price-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 10px; }
+        .item-price { color: var(--primary-blue); font-weight: 800; font-size: 1.2rem; }
         
-        .menu-item { text-align: center; margin-bottom: 28px; padding-bottom: 15px; border-bottom: 1px dashed var(--allergen-border);}
-        .menu-item:last-of-type { border-bottom: none; margin-bottom: 10px; }
-        .item-name { color: var(--text-main); font-weight: 800; font-size: 1.15rem; margin-bottom: 4px; }
-        .item-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.4; }
-        .item-price-row { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-        .item-price { color: var(--accent-amber); font-weight: 800; font-size: 1.3rem; }
-        
-        .badge-local { display: inline-block; background-color: var(--light-blue); color: var(--primary-blue); font-size: 0.75rem; font-weight: 800; padding: 4px 10px; border-radius: 12px; margin-top: 8px; }
-        .allergen-pills { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; justify-content: center; }
-        .allergen-badge { display: inline-flex; align-items: center; justify-content: center; background: #ffffff; border: 1px solid var(--allergen-border); border-radius: 12px; padding: 4px 8px; font-size: 16px; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
-        .diet-badge { display: inline-flex; align-items: center; justify-content: center; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; font-weight: 800; color: white; }
+        .allergen-pills { display: flex; gap: 6px; }
+        .allergen-badge { 
+            display: inline-flex; align-items: center; justify-content: center; 
+            background: #fff; border: 1px solid var(--allergen-border); 
+            border-radius: 50%; width: 30px; height: 30px; font-size: 14px; cursor: pointer;
+        }
+        .diet-badge { padding: 2px 8px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; color: white; }
         .diet-v { background-color: var(--vegan); }
         .diet-vg { background-color: var(--vegetarian); }
 
         /* Modal */
-        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 59, 122, 0.6); backdrop-filter: blur(5px); z-index: 99999; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: 0.3s; }
+        .modal-overlay { 
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+            background: rgba(27, 58, 87, 0.4); backdrop-filter: blur(8px); 
+            z-index: 99999; display: flex; align-items: center; justify-content: center; 
+            opacity: 0; visibility: hidden; transition: 0.3s; 
+        }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { background: white; border-radius: 20px; padding: 30px 25px; width: 90%; max-width: 320px; text-align: center; transform: translateY(20px); transition: 0.3s; box-shadow: 0 10px 40px rgba(0,0,0,0.2);}
-        .modal-overlay.active .modal-content { transform: translateY(0); }
-        .modal-close-btn { background: var(--primary-blue); color: white; border: none; padding: 10px 25px; border-radius: 25px; font-size: 1rem; font-weight: 700; cursor: pointer; margin-top: 15px;}
+        .modal-content { 
+            background: white; border-radius: 25px; padding: 35px; width: 85%; max-width: 300px; 
+            text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        .modal-close-btn { 
+            background: var(--primary-blue); color: white; border: none; padding: 12px 30px; 
+            border-radius: 30px; font-size: 0.9rem; font-weight: 700; cursor: pointer; margin-top: 20px;
+        }
 
-        /* Footer & Notices */
-        .notices-box { background: var(--light-blue); border-radius: 16px; padding: 20px; text-align: center; margin: 40px 0; font-size: 0.95rem; color: var(--primary-blue); }
-        footer { text-align: center; padding: 40px 15px; font-size: 0.9rem; color: white; background: var(--primary-blue); border-top: 4px solid var(--accent-amber); }
-        footer p { margin-bottom: 5px; color: rgba(255,255,255,0.7);}
+        /* Footer */
+        footer { 
+            text-align: center; padding: 50px 20px; background: #fff; 
+            border-top: 1px solid var(--allergen-border); color: var(--soft-blue); font-size: 0.85rem;
+        }
+        footer .hotel-name { font-family: 'Playfair Display', serif; color: var(--primary-blue); font-size: 1.4rem; font-weight: 800; margin-bottom: 5px;}
         
-        .allergen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 25px 0; }
-        .allergen-card { background: var(--bg-page); padding: 10px; border-radius: 12px; text-align: center; font-size: 0.8rem; border: 1px solid var(--allergen-border); }
-        .allergen-card .badge-icon { font-size: 1.5rem; }
-        .allergen-card .badge-num { font-weight: 800; display: block; color: var(--accent-amber);}
+        .allergen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 20px; }
+        .allergen-card { 
+            background: var(--ice-blue); padding: 15px; border-radius: 15px; 
+            text-align: center; font-size: 0.8rem; color: var(--primary-blue);
+        }
+        .badge-icon { font-size: 1.4rem; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
     <div id="splash-screen" class="splash-screen">
-        <div class="bokeh bokeh-blue"></div>
-        <div class="bokeh bokeh-amber"></div>
-        <div class="wavy-fabric"></div>
-        <div class="wavy-fabric-2"></div>
-        
-        <div class="splash-content">
-            <div class="logo-floating-container">
-                <div class="splash-title">GOLDEN SAND</div>
-                <div class="splash-hotel">FEGOUDAKIS HOTELS & RESORTS</div>
-            </div>
-            <div class="splash-subtitle">Sip. Relax. Enjoy.</div>
+        <div class="logo-fill-container">
+            <div class="hotel-typographic logo-bg-gray">GOLDEN SAND<div class="hotel-stars">★★★★</div></div>
+            <div class="hotel-typographic logo-fg-gold">GOLDEN SAND<div class="hotel-stars">★★★★</div></div>
         </div>
+        <div class="splash-hotel">Fegoudakis Hotels & Resorts</div>
+        <div class="splash-subtitle">Sip. Relax. Enjoy.</div>
     </div>
 
     <div id="allergen-modal" class="modal-overlay">
         <div class="modal-content">
-            <div id="modal-icon" style="font-size: 3rem; margin-bottom: 10px;"></div>
-            <div id="modal-text" style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 20px;"></div>
+            <div id="modal-icon" style="font-size: 3.5rem; margin-bottom: 15px;"></div>
+            <div id="modal-text" style="color: var(--primary-blue); font-size: 1rem; line-height: 1.4;"></div>
             <button id="modal-close-btn" class="modal-close-btn">ΕΝΤΑΞΕΙ</button>
         </div>
     </div>
 
-    <header class="header-container">
+    <header>
         <div class="main-logo-text">GOLDEN SAND</div>
-        <div class="main-logo-sub">FEGOUDAKIS HOTELS & RESORTS</div>
-        <svg class="wave-header" viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
-        </svg>
+        <div class="main-logo-sub">Fegoudakis Hotels</div>
     </header>
 
-    <nav class="stable-nav-container">
-        <div class="category-grid">
-            <a href="#coffees" class="category-btn"><span class="icon">☕</span>Coffees</a>
-            <a href="#juices" class="category-btn"><span class="icon">🍹</span>Juices</a>
-            <a href="#beers" class="category-btn"><span class="icon">🍺</span>Beers</a>
-            <a href="#drinks" class="category-btn"><span class="icon">🍸</span>Drinks</a>
-            <a href="#snacks" class="category-btn"><span class="icon">🥪</span>Snacks</a>
-            <a href="#salads" class="category-btn"><span class="icon">🥗</span>Salads</a>
-            <a href="#appetizers" class="category-btn"><span class="icon">🍤</span>Starters</a>
-            <a href="#greek" class="category-btn"><span class="icon">🥘</span>Greek</a>
-            <a href="#allergens" class="category-btn nav-allergens"><span class="icon">⚠</span>Allergens</a>
+    <nav class="nav-container">
+        <div class="nav-scroll">
+            <a href="#coffees" class="active">Coffees</a>
+            <a href="#juices">Juices</a>
+            <a href="#beers">Beers</a>
+            <a href="#drinks">Drinks</a>
+            <a href="#snacks">Snacks</a>
+            <a href="#salads">Salads</a>
+            <a href="#greek">Greek Kitchen</a>
+            <a href="#allergens">⚠ Allergens</a>
         </div>
     </nav>
 
     <main>
         <section id="coffees" class="menu-section">
-            <div class="section-header">
-                <h2 class="section-title">ΚΑΦΕΔΕΣ & ΡΟΦΗΜΑΤΑ</h2>
-                <div class="section-subtitle">Coffee & Beverage</div>
+            <h2 class="section-title">ΚΑΦΕΔΕΣ</h2>
+            <div class="section-subtitle">Coffee & More</div>
+            
+            <div class="menu-item">
+                <div class="item-name">Espresso Macchiato</div>
+                <div class="item-price-row">
+                    <span class="item-price">4.00€</span>
+                    <div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span></div>
+                </div>
             </div>
-            <div class="menu-item"><div class="item-name">Εσπρέσσο μακιάτο | Espresso macchiato</div><div class="item-price-row"><span class="item-price">4.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span></div></div></div>
-            <div class="menu-item"><div class="item-name">Καπουτσίνο μονός | Cappuccino single</div><div class="item-price-row"><span class="item-price">4.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span></div></div></div>
-            <div class="menu-item"><div class="item-name">Φρέντο εσπρέσσο | Freddo espresso</div><div class="item-price-row"><span class="item-price">3.50€</span></div></div>
-            <div class="menu-item"><div class="item-name">Φρέντο καπουτσίνο | Freddo cappuccino</div><div class="item-price-row"><span class="item-price">4.50€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span></div></div></div>
-            <div class="menu-item"><div class="item-name">Ελληνικός παραδοσιακός | Greek traditional</div><div class="item-price-row"><span class="item-price">2.50€</span></div></div>
+            <div class="menu-item">
+                <div class="item-name">Freddo Espresso</div>
+                <div class="item-price-row"><span class="item-price">3.50€</span></div>
+            </div>
+            <div class="menu-item">
+                <div class="item-name">Freddo Cappuccino</div>
+                <div class="item-price-row">
+                    <span class="item-price">4.50€</span>
+                    <div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span></div>
+                </div>
+            </div>
         </section>
 
         <section id="juices" class="menu-section">
-            <div class="section-header"><h2 class="section-title">ΧΥΜΟΙ & ΑΝΑΨΥΚΤΙΚΑ</h2><div class="section-subtitle">Juices & Refreshments</div></div>
-            <div class="menu-item"><div class="item-name">Φυσικός χυμός πορτοκάλι | Fresh orange juice</div><div class="item-price-row"><span class="item-price">6.00€</span></div></div>
-            <div class="menu-item"><div class="item-name">Smoothies (διάφορες γεύσεις) | Smoothies</div><div class="item-price-row"><span class="item-price">6.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span></div></div></div>
-            <div class="menu-item"><div class="item-name">MastiH2O (διάφορες γεύσεις)</div><div class="badge-local">TASTE CHIOS</div><div class="item-price-row"><span class="item-price">5.00€</span></div></div>
-        </section>
-
-        <section id="beers" class="menu-section">
-            <div class="section-header"><h2 class="section-title">ΜΠΥΡΕΣ</h2><div class="section-subtitle">Beers</div></div>
-            <div class="menu-item"><div class="item-name">Heineken 500 ml</div><div class="item-price-row"><span class="item-price">6.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div></div>
-            <div class="menu-item"><div class="item-name">Amstel / Mythos / Fix 500 ml</div><div class="item-price-row"><span class="item-price">5.50€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div></div>
-            <div class="menu-item"><div class="item-name">"Chios Beer" 330ml</div><div class="badge-local">TASTE CHIOS</div><div class="item-price-row"><span class="item-price">6.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div></div>
-        </section>
-
-        <section id="drinks" class="menu-section">
-            <div class="section-header"><h2 class="section-title">ΠΟΤΑ & ΚΡΑΣΙ</h2><div class="section-subtitle">Drinks & Wine</div></div>
-            <div class="menu-item"><div class="item-name">Ποτό απλό | Straight drink</div><div class="item-price-row"><span class="item-price">7.50€</span></div></div>
-            <div class="menu-item"><div class="item-name">Ποτό σπέσιαλ | Drink special</div><div class="item-price-row"><span class="item-price">9.50€</span></div></div>
-            <div class="menu-item"><div class="item-name">Τσίπουρο / Ούζο Χίου καραφάκι 200ml</div><div class="badge-local">TASTE CHIOS</div><div class="item-price-row"><span class="item-price">9.00€</span></div></div>
+            <h2 class="section-title">ΧΥΜΟΙ</h2>
+            <div class="section-subtitle">Fresh & Natural</div>
+            <div class="menu-item"><div class="item-name">Φυσικός Χυμός Πορτοκάλι</div><div class="item-price-row"><span class="item-price">6.00€</span></div></div>
+            <div class="menu-item"><div class="item-name">Smoothie (Διάφορες Γεύσεις)</div><div class="item-price-row"><span class="item-price">6.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span></div></div></div>
         </section>
 
         <section id="snacks" class="menu-section">
-            <div class="section-header"><h2 class="section-title">ΣΝΑΚ</h2><div class="section-subtitle">Snacks</div></div>
+            <h2 class="section-title">ΣΝΑΚ</h2>
+            <div class="section-subtitle">Light Bites</div>
             <div class="menu-item">
-                <div class="item-name">Κλάμπ σάντουιτς | Club sandwich</div>
-                <div class="item-price-row"><span class="item-price">9.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="6" data-icon="🥚">🥚</span><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div>
+                <div class="item-name">Club Sandwich</div>
+                <div class="item-desc">Με γαλοπούλα, τυρί, μπέικον, ντομάτα & μαγιονέζα</div>
+                <div class="item-price-row">
+                    <span class="item-price">9.00€</span>
+                    <div class="allergen-pills">
+                        <span class="allergen-badge" data-allergen="6" data-icon="🥚">🥚</span>
+                        <span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span>
+                        <span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span>
+                    </div>
+                </div>
             </div>
             <div class="menu-item">
-                <div class="item-name">Μπέργκερ με μοσχαρίσιο κιμά | Burger</div>
-                <div class="item-price-row"><span class="item-price">10.50€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="6" data-icon="🥚">🥚</span><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div>
+                <div class="item-name">Pizza Margarita</div>
+                <div class="item-price-row">
+                    <span class="item-price">11.50€</span>
+                    <div class="allergen-pills">
+                        <span class="diet-badge diet-vg">Vg</span>
+                        <span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span>
+                        <span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span>
+                    </div>
+                </div>
             </div>
-            <div class="menu-item">
-                <div class="item-name">Πίτσα μαργαρίτα | Pizza Margarita</div>
-                <div class="item-price-row"><span class="item-price">11.50€</span><div class="allergen-pills"><span class="diet-badge diet-vg">Vg</span><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div>
-            </div>
         </section>
 
-        <section id="salads" class="menu-section">
-            <div class="section-header"><h2 class="section-title">ΣΑΛΑΤΕΣ</h2><div class="section-subtitle">Salads</div></div>
-            <div class="menu-item"><div class="item-name">Ελληνική σαλάτα | Greek salad</div><div class="item-price-row"><span class="item-price">9.50€</span><div class="allergen-pills"><span class="diet-badge diet-vg">Vg</span><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span></div></div></div>
-            <div class="menu-item"><div class="item-name">Σαλάτα του Καίσαρα | Ceasar's salad</div><div class="item-price-row"><span class="item-price">10.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="6" data-icon="🥚">🥚</span><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span><span class="allergen-badge" data-allergen="12" data-icon="🌿">🌿</span></div></div></div>
-        </section>
-
-        <section id="appetizers" class="menu-section">
-            <div class="section-header"><h2 class="section-title">ΟΡΕΚΤΙΚΑ</h2><div class="section-subtitle">Appetizers</div></div>
-            <div class="menu-item"><div class="item-name">Μαστέλο Χίου, σχάρας | Grilled Mastelo</div><div class="badge-local">TASTE CHIOS</div><div class="item-price-row"><span class="item-price">9.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span></div></div></div>
-            <div class="menu-item"><div class="item-name">Καλαμάρι τηγανητό | Fried squid</div><div class="item-price-row"><span class="item-price">14.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="4" data-icon="🦑">🦑</span><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div></div>
-        </section>
-
-        <section id="greek" class="menu-section">
-            <div class="section-header"><h2 class="section-title">ΠΑΡΑΔΟΣΗ & ΣΧΑΡΑ</h2><div class="section-subtitle">Greek Kitchen & Grilled</div></div>
-            <div class="menu-item"><div class="item-name">Χειροποίητα στριφτάρια Χίου</div><div class="badge-local">TASTE CHIOS</div><div class="item-price-row"><span class="item-price">8.50€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div></div>
-            <div class="menu-item"><div class="item-name">Μουσακάς παραδοσιακός | Traditional Moussaka</div><div class="item-price-row"><span class="item-price">9.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="6" data-icon="🥚">🥚</span><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div></div>
-            <div class="menu-item"><div class="item-name">Γύρος χοιρινός μερίδα | Pork gyros portion</div><div class="item-price-row"><span class="item-price">14.00€</span><div class="allergen-pills"><span class="allergen-badge" data-allergen="7" data-icon="🥛">🥛</span><span class="allergen-badge" data-allergen="8" data-icon="🌾">🌾</span></div></div></div>
-        </section>
-
-        <div class="notices-box">
-            <p><strong>Διαθέτουμε και Ελληνικό Πρωινό | Greek breakfast:</strong> 13.00€</p>
-            <p><strong>Ελάχιστη κατανάλωση για μη ενοίκους:</strong> 8.00€ / person</p>
-        </div>
-
-        <section id="allergens" class="menu-section" style="border: 2px solid var(--primary-blue);">
-            <div class="section-header"><h2 class="section-title">⚠ ALLERGENS</h2><div class="section-subtitle">Αλλεργιογόνα / Alerjenler</div></div>
+        <section id="allergens" class="menu-section" style="border: 2px solid var(--ice-blue);">
+            <h2 class="section-title">ΑΛΛΕΡΓΙΟΓΟΝΑ</h2>
+            <div class="section-subtitle">Information</div>
             <div class="allergen-grid">
-                <div class="allergen-card"><span class="badge-icon">🥜</span><span class="badge-num">1</span>Φιστίκια<br>Peanuts</div>
-                <div class="allergen-card"><span class="badge-icon">🌰</span><span class="badge-num">2</span>Ξηροί καρποί<br>Tree Nuts</div>
-                <div class="allergen-card"><span class="badge-icon">🦐</span><span class="badge-num">3</span>Καρκινοειδή<br>Crustaceans</div>
-                <div class="allergen-card"><span class="badge-icon">🦑</span><span class="badge-num">4</span>Μαλάκια<br>Molluscs</div>
-                <div class="allergen-card"><span class="badge-icon">🐟</span><span class="badge-num">5</span>Ψάρι<br>Fish</div>
-                <div class="allergen-card"><span class="badge-icon">🥚</span><span class="badge-num">6</span>Αυγά<br>Eggs</div>
-                <div class="allergen-card"><span class="badge-icon">🥛</span><span class="badge-num">7</span>Γάλα<br>Milk</div>
-                <div class="allergen-card"><span class="badge-icon">🌾</span><span class="badge-num">8</span>Γλουτένη<br>Gluten</div>
-                <div class="allergen-card"><span class="badge-icon">🫘</span><span class="badge-num">9</span>Σόγια<br>Soya</div>
-                <div class="allergen-card"><span class="badge-icon">🌱</span><span class="badge-num">10</span>Σουσάμι<br>Sesame</div>
-                <div class="allergen-card"><span class="badge-icon">🥬</span><span class="badge-num">11</span>Σέλινο<br>Celery</div>
-                <div class="allergen-card"><span class="badge-icon">🌿</span><span class="badge-num">12</span>Μουστάρδα<br>Mustard</div>
-                <div class="allergen-card"><span class="badge-icon">🌼</span><span class="badge-num">13</span>Λούπινο<br>Lupin</div>
-                <div class="allergen-card"><span class="badge-icon">🍷</span><span class="badge-num">14</span>Θειώδη<br>Sulphites</div>
+                <div class="allergen-card"><span class="badge-icon">🥚</span>Αυγά / Eggs</div>
+                <div class="allergen-card"><span class="badge-icon">🥛</span>Γάλα / Milk</div>
+                <div class="allergen-card"><span class="badge-icon">🌾</span>Γλουτένη / Gluten</div>
+                <div class="allergen-card"><span class="badge-icon">🥜</span>Ξηροί Καρποί / Nuts</div>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="main-logo-text" style="font-size: 1.5rem; margin-bottom: 5px;">GOLDEN SAND</div>
+        <div class="hotel-name">GOLDEN SAND</div>
         <p>FEGOUDAKIS HOTELS & RESORTS</p>
-        <p>T. 2271032080 | E. info@goldensand.gr</p>
-        <p>Karfas, Chios</p>
+        <p>Karfas, Chios | +30 22710 32080</p>
+        <p style="margin-top: 15px; font-size: 0.7rem;">&copy; 2024 Premium Digital Menu</p>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Splash Screen
-            const splashScreen = document.getElementById('splash-screen');
-            const splashTimeout = setTimeout(() => { splashScreen.classList.add('hidden'); }, 3500);
-            splashScreen.addEventListener('click', () => { clearTimeout(splashTimeout); splashScreen.classList.add('hidden'); });
+            // Splash Screen Timeout
+            const splash = document.getElementById('splash-screen');
+            setTimeout(() => { splash.classList.add('hidden'); }, 4000);
+            splash.addEventListener('click', () => splash.classList.add('hidden'));
 
-            // Allergen Modal
-            const allergensMap = {
-                "1": "<strong>1. Φιστίκια / Peanuts</strong>",
-                "2": "<strong>2. Ξηροί καρποί / Tree Nuts</strong>",
-                "3": "<strong>3. Καρκινοειδή / Crustaceans</strong>",
-                "4": "<strong>4. Μαλάκια / Molluscs</strong>",
-                "5": "<strong>5. Ψάρι / Fish</strong>",
-                "6": "<strong>6. Αυγά / Eggs</strong>",
-                "7": "<strong>7. Γάλα / Milk</strong>",
-                "8": "<strong>8. Γλουτένη / Gluten</strong>",
-                "9": "<strong>9. Σόγια / Soya</strong>",
-                "10": "<strong>10. Σουσάμι / Sesame</strong>",
-                "11": "<strong>11. Σέλινο / Celery</strong>",
-                "12": "<strong>12. Μουστάρδα / Mustard</strong>",
-                "13": "<strong>13. Λούπινο / Lupin</strong>",
-                "14": "<strong>14. Διοξείδιο θείου / Sulphites</strong>"
+            // Modal System
+            const modal = document.getElementById('allergen-modal');
+            const mText = document.getElementById('modal-text');
+            const mIcon = document.getElementById('modal-icon');
+            
+            const allergens = {
+                "6": "<strong>Αυγά / Eggs</strong><br>Περιέχει αυγό ή ίχνη αυγού.",
+                "7": "<strong>Γάλα / Milk</strong><br>Περιέχει λακτόζη ή γαλακτοκομικά προϊόντα.",
+                "8": "<strong>Γλουτένη / Gluten</strong><br>Περιέχει σιτηρά, κριθάρι ή αλεύρι."
             };
 
-            const modalOverlay = document.getElementById('allergen-modal');
-            const modalText = document.getElementById('modal-text');
-            const modalIcon = document.getElementById('modal-icon');
-            const modalCloseBtn = document.getElementById('modal-close-btn');
-
-            document.querySelectorAll('.allergen-badge').forEach(badge => {
-                badge.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const allergenId = badge.getAttribute('data-allergen');
-                    const emojiIcon = badge.getAttribute('data-icon');
-                    if (allergensMap[allergenId]) {
-                        modalIcon.textContent = emojiIcon;
-                        modalText.innerHTML = allergensMap[allergenId];
-                        modalOverlay.classList.add('active');
-                    }
+            document.querySelectorAll('.allergen-badge').forEach(b => {
+                b.addEventListener('click', () => {
+                    const id = b.dataset.allergen;
+                    mIcon.textContent = b.dataset.icon;
+                    mText.innerHTML = allergens[id] || "Πληροφορίες Αλλεργιογόνου";
+                    modal.classList.add('active');
                 });
             });
 
-            const closeModal = () => modalOverlay.classList.remove('active');
-            modalCloseBtn.addEventListener('click', closeModal);
-            modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeModal(); });
+            document.getElementById('modal-close-btn').addEventListener('click', () => modal.classList.remove('active'));
 
-            // Smooth Scroll for the new Grid buttons
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetSection = document.querySelector(targetId);
-                    window.scrollTo({
-                        top: targetSection.offsetTop - 20,
-                        behavior: 'smooth'
-                    });
+            // Smooth Scroll & Active Nav
+            const navLinks = document.querySelectorAll('.nav-scroll a');
+            const sections = document.querySelectorAll('section');
+
+            window.addEventListener('scroll', () => {
+                let current = "";
+                sections.forEach(s => {
+                    const top = s.offsetTop;
+                    if (pageYOffset >= top - 150) { current = s.getAttribute('id'); }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                        // Scroll nav pill into view
+                        link.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                    }
                 });
             });
         });

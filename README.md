@@ -6,7 +6,7 @@ Welcome to my repository! Here you will find a collection of digital menus I hav
 
 This repository includes the following projects. Each folder contains the source code and assets for a specific menu:
 
-### 1. [golden sun hotel](./menu-project-1/) 🍕
+### 1. [golden sun hotel](index.html) 🍕
 A brief description of the menu (e.g., A modern, fully responsive digital menu for a local cafe).
 - **Technologies Used:** HTML, CSS, JavaScript
 - **Features:** Mobile-friendly design, interactive categories.
